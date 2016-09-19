@@ -162,7 +162,9 @@ func setupKubeconfig(name, server, certAuth string) error {
 	config.Clusters[clusterName] = cluster
 
 	// user
-	userName := name
+	userName := strings.Replace(server, "https://", "", -1)
+	userName = "admin/" + strings.Replace(userName, ".", "-", -1)
+
 	user := cfg.NewAuthInfo()
 	config.AuthInfos[userName] = user
 
